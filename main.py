@@ -9,15 +9,20 @@ def yaml_to_json(yaml_str):
     except yaml.YAMLError as e:
         return f"Erro ao processar YAML: {e}"
 
-# Exemplo de uso
-yaml_string = """
-key1: value1
-key2:
-  - item1
-  - item2
-key3:
-  subkey1: subvalue1
-"""
+def read_yaml_file(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            yaml_str = file.read()
+        return yaml_str
+    except Exception as e:
+        return f"Erro ao ler arquivo YAML: {e}"
 
-json_result = yaml_to_json(yaml_string)
-print(json_result)
+# Exemplo de uso com leitura de arquivo
+yaml_file_path = 'exemplo.yaml'
+
+try:
+    yaml_content = read_yaml_file(yaml_file_path)
+    json_result = yaml_to_json(yaml_content)
+    print(json_result)
+except Exception as e:
+    print(f"Erro: {e}")
